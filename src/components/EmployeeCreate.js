@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Picker } from 'react-native';
+import { Picker, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { employeeUpdate } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
@@ -26,19 +26,20 @@ class EmployeeCreate extends Component {
                     />
                 </CardSection>
 
-                <CardSection>
+                <CardSection style={{ flexDirection: 'column' }}>
+                    <Text style={styles.pickerTextStyle}>Shift</Text>
                     <Picker
                     style={{ flex: 1 }}
                     selectedValue={this.props.shift}
-                    onValueChange={day => this.props.employeeUpdate({ prop: 'shift', value: day })}
+                    onValueChange={value => this.props.employeeUpdate({ prop: 'shift', value })}
                     >
-                        <Picker.Item label="Monday" value="Monday" />
-                        <Picker.Item label="Tuesday" value="Tuesday" />
-                        <Picker.Item label="Wednesday" value="Wednesday" />
-                        <Picker.Item label="Thursday" value="Thursday" />
-                        <Picker.Item label="Friday" value="Friday" />
-                        <Picker.Item label="Saturday" value="Saturday" />
-                        <Picker.Item label="Sunday" value="Sunday" />
+                    <Picker.Item label="Monday" value="Monday" />
+                    <Picker.Item label="Tuesday" value="Tuesday" />
+                    <Picker.Item label="Wednesday" value="Wednesday" />
+                    <Picker.Item label="Thursday" value="Thursday" />
+                    <Picker.Item label="Friday" value="Friday" />
+                    <Picker.Item label="Saturday" value="Saturday" />
+                    <Picker.Item label="Sunday" value="Sunday" />
                     </Picker>
                 </CardSection>
 
@@ -58,6 +59,13 @@ const mapStateToProps = (state) => {
         phone: state.employeeForm.phone,
         shift: state.employeeForm.shift
     };  
+};
+
+const styles = {
+    pickerTextStyle: {
+        fontSize: 18,
+        paddingLeft: 20
+    }
 };
 
 export default connect(mapStateToProps, { employeeUpdate })(EmployeeCreate);
